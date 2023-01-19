@@ -8,7 +8,9 @@ start_time = time.time()
 def openImage(imgName):
     img = PIL.Image.open(f"raw/{imgName}")
     img.thumbnail((100,100))
-    img.save(f"{imgName}","JPEG")
+    if not os.path.exists("finals"):
+        os.makedirs("finals")
+    img.save(f"finals/{imgName}","JPEG")
     exif_data = img._getexif()
     return exif_data
 
@@ -27,3 +29,5 @@ if __name__ == '__main__':
 print('Processing time standard: {0} [sec]'.format(time.time() - start_time))
 
 
+# https://docs.python.org/3/library/multiprocessing.html
+# https://github.com/andrewning/sortphotos
